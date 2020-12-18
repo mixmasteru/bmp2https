@@ -9,7 +9,7 @@ class TestHandlerCase(unittest.TestCase):
         result = index.handler(None, None)
         print(result)
         self.assertEqual(result['statusCode'], 200)
-        self.assertEqual(result['headers']['Content-Type'], 'application/bmp')
+        self.assertEqual(result['headers']['Content-Type'], 'image/bmp')
         #self.assertIn('Hello World', result['body'])
 
 

@@ -2,6 +2,7 @@ import base64
 
 
 def handler(event, context):
+
     with open("falcon9_pil.bmp", "rb") as image:
         f = image.read()
         b = bytearray(f)

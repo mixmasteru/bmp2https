@@ -38,8 +38,11 @@ local computer. If you haven't, do that first. You can find instructions in the 
 
         $ source .venv/bin/activate
 
-3. Install the SAM CLI. For details see 
-   https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html
+3. Install the SAM CLI. For Ubuntu:
+        
+        $ pip install --user --upgrade setuptools
+        $ pip install ez_setup
+        $ pip install aws-sam-cli
 
 4. Start the development server:
 

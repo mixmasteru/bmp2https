@@ -16,6 +16,9 @@ Parameters:
     Default: ''
 
 Globals:
+  Api:
+    BinaryMediaTypes:
+      - image~1bmp
   Function:
     AutoPublishAlias: live
     DeploymentPreference:

@@ -4,7 +4,7 @@ from boto3 import client
 
 def handler(event, context):
     b = ""
-    if event.pathParameters.bucket:
+    if event is not None and event.pathParameters.bucket:
         bucket = event.pathParameters.bucket
         s3bmp(bucket)
     else:

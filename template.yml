@@ -18,7 +18,7 @@ Parameters:
 Globals:
   Api:
     BinaryMediaTypes:
-      - image~1bmp
+      - *~1*
   Function:
     AutoPublishAlias: live
     DeploymentPreference:
@@ -41,7 +41,7 @@ Resources:
         GetEvent:
           Type: Api
           Properties:
-            Path: /
+            Path: /bmp/{bucket}
             Method: get
         PostEvent:
           Type: Api

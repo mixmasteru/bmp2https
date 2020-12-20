@@ -33,7 +33,7 @@ Resources:
       FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-bmp2https'
       Policies:
         - S3ReadPolicy:
-            bucketName: bmp2https
+            BucketName: bmp2https
       Handler: index.handler
       Runtime: python3.7
       Role:

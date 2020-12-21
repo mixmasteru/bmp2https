@@ -19,6 +19,8 @@ Globals:
   Api:
     BinaryMediaTypes:
       - image~1bmp
+    Auth:
+      ApiKeyRequired: true
   Function:
     AutoPublishAlias: live
     DeploymentPreference:

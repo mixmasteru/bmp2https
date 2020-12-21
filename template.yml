@@ -26,8 +26,6 @@ Globals:
         Quota:
           Limit: 600
           Period: DAY
-        Throttle:
-          RateLimit: 5
   Function:
     AutoPublishAlias: live
     DeploymentPreference:

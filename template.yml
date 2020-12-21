@@ -21,6 +21,13 @@ Globals:
       - image~1bmp
     Auth:
       ApiKeyRequired: true
+      UsagePlan:
+        CreateUsagePlan: PER_API
+        Quota:
+          Limit: 500
+          Period: DAY
+        Throttle:
+          RateLimit: 5
   Function:
     AutoPublishAlias: live
     DeploymentPreference:

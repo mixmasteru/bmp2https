@@ -4,7 +4,7 @@ from boto3 import client
 
 
 def handler(event, context):
-    b = ""
+    b = "".encode()
     if event is not None and event['pathParameters']['bucket']:
         bucket = event['pathParameters']['bucket']
         path = s3bmp(bucket)

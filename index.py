@@ -1,4 +1,5 @@
 import base64
+import os
 from boto3 import client
 
 
@@ -6,9 +7,9 @@ def handler(event, context):
     b = ""
     if event is not None and event['pathParameters']['bucket']:
         bucket = event['pathParameters']['bucket']
-        s3bmp(bucket)
-    else:
-        with open("falcon9_pil.bmp", "rb") as image:
+        path = s3bmp(bucket)
+
+        with open(path, "rb") as image:
             f = image.read()
             b = bytearray(f)
 
@@ -16,9 +17,21 @@ def handler(event, context):
 
 
 def s3bmp(bucket_name):
-    conn = client('s3')  # again assumes boto.cfg setup, assume AWS S3
-    for key in conn.list_objects(Bucket=bucket_name)['Contents']:
-        print(key['Key'])
+    s3 = client("s3")
+    response = s3.list_objects_v2(
+        Bucket=bucket_name,
+        Prefix='dither',
+        MaxKeys=100)
+
+    folder = response['Contents'][0]['Key']
+    key = response['Contents'][1]['Key']
+    download_path = '/tmp/' + key
+    folder = '/tmp/' + folder
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    s3.download_file(bucket_name, key, download_path)
+
+    return download_path
 
 
 def respond(buf):

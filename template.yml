@@ -31,9 +31,6 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       FunctionName: !Sub 'awscodestar-${ProjectId}-lambda-bmp2https'
-      Policies:
-        - S3ReadPolicy:
-            BucketName: bmp2https
       Handler: index.handler
       Runtime: python3.7
       Role:

@@ -1,5 +1,6 @@
 import base64
 import os
+import random
 from boto3 import client
 
 
@@ -17,6 +18,7 @@ def handler(event, context):
 
 
 def s3bmp(bucket_name):
+    download_path = ""
     s3 = client("s3")
     response = s3.list_objects_v2(
         Bucket=bucket_name,
@@ -24,12 +26,15 @@ def s3bmp(bucket_name):
         MaxKeys=100)
 
     folder = response['Contents'][0]['Key']
-    key = response['Contents'][1]['Key']
-    download_path = '/tmp/' + key
-    folder = '/tmp/' + folder
-    if not os.path.exists(folder):
-        os.makedirs(folder)
-    s3.download_file(bucket_name, key, download_path)
+    cnt = response['KeyCount']
+    if cnt > 1:
+        rand = random.randint(1, cnt - 1)
+        key = response['Contents'][rand]['Key']
+        download_path = '/tmp/' + key
+        folder = '/tmp/' + folder
+        if not os.path.exists(folder):
+            os.makedirs(folder)
+        s3.download_file(bucket_name, key, download_path)
 
     return download_path
 

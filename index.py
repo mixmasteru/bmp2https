@@ -6,9 +6,13 @@ from boto3 import client
 
 def handler(event, context):
     b = "".encode()
+    bmpid = 1
     if event is not None and event['pathParameters']['bucket']:
         bucket = event['pathParameters']['bucket']
-        path = s3bmp(bucket)
+        if 'bmpid' in event['pathParameters']:
+            bmpid = int(event['pathParameters']['bmpid'])
+
+        path = s3bmp(bucket, bmpid)
 
         with open(path, "rb") as image:
             f = image.read()
@@ -17,7 +21,7 @@ def handler(event, context):
     return respond(b)
 
 
-def s3bmp(bucket_name):
+def s3bmp(bucket_name, bmpid):
     download_path = ""
     s3 = client("s3")
     response = s3.list_objects_v2(
@@ -27,9 +31,8 @@ def s3bmp(bucket_name):
 
     folder = response['Contents'][0]['Key']
     cnt = response['KeyCount']
-    if cnt > 1:
-        rand = random.randint(1, cnt - 1)
-        key = response['Contents'][rand]['Key']
+    if cnt > bmpid:
+        key = response['Contents'][bmpid]['Key']
         download_path = '/tmp/' + key
         folder = '/tmp/' + folder
         if not os.path.exists(folder):

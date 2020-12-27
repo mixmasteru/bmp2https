@@ -1,7 +1,7 @@
 import base64
 import os
 from boto3 import client
-from PIL import image
+from PIL import Image
 
 
 def handler(event, context):

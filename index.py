@@ -1,6 +1,5 @@
 import base64
 import os
-import random
 from boto3 import client
 
 
